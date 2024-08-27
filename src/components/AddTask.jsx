@@ -1,4 +1,3 @@
-import propTypes from "prop-types";
 import { useContext } from "react";
 import DataContext from "../contexts/DataProvider";
 
@@ -21,10 +20,5 @@ const AddTask = () => {
   );
 };
 
-AddTask.propTypes = {
-  newTask: propTypes.string,
-  setNewTask: propTypes.func.isRequired,
-  handleSubmit: propTypes.func.isRequired,
-};
 
 export default AddTask;

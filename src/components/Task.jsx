@@ -6,12 +6,13 @@ import DataContext from "../contexts/DataProvider";
 import propTypes from "prop-types";
 
 const Task = ({ task }) => {
-  const { handleDelete, handleEdit, handleCheck } = useContext(DataContext);
+  const { handleCheck, handleEdit, handleDelete } = useContext(DataContext);
   return (
     <div className="task">
       <CustomCheckbox task={task} handleCheck={handleCheck} />
       <p
         className="task-body"
+        onClick={() => handleCheck(task.id)}
         style={{ textDecoration: task.checked ? "line-through" : "none" }}
       >
         {task.item}
@@ -35,8 +36,6 @@ Task.propTypes = {
     checked: propTypes.bool.isRequired,
     item: propTypes.string.isRequired,
   }),
-  handleDelete: propTypes.func.isRequired,
-  handleEdit: propTypes.func.isRequired,
 };
 
 export default Task;

@@ -1,4 +1,3 @@
-import propTypes from "prop-types";
 import { useContext } from "react";
 import DataContext from "../contexts/DataProvider";
 
@@ -26,11 +25,6 @@ const TaskFilters = () => {
       </div>
     </div>
   );
-};
-
-TaskFilters.propTypes = {
-  filter: propTypes.string.isRequired,
-  setFilter: propTypes.func.isRequired,
 };
 
 export default TaskFilters;

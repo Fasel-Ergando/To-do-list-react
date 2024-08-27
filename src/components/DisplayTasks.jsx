@@ -1,38 +1,52 @@
-import propTypes from "prop-types";
 import Task from "./Task";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import DataContext from "../contexts/DataProvider";
 
 const DisplayTasks = () => {
-  const { tasks, handleDelete, handleEdit } = useContext(DataContext);
+  const {
+    tasks,
+    filteredTasks,
+    setFilteredTasks,
+    handleDelete,
+    handleEdit,
+    handleCheck,
+    filter,
+  } = useContext(DataContext);
+
+  useEffect(() => {
+    const completedTasks = tasks.filter((task) => task.checked);
+    const uncompletedTasks = tasks.filter((task) => !task.checked);
+
+    if (filter === "all") {
+      setFilteredTasks(tasks);
+    } else if (filter === "progress") {
+      setFilteredTasks(uncompletedTasks);
+    } else if (filter === "finished") {
+      setFilteredTasks(completedTasks);
+    }
+  }, [filter, tasks]);
+
   return (
     <div className="displayTasks">
-      {tasks.length ? (
-        tasks.map((task) => (
+      {filteredTasks.length ? (
+        filteredTasks.map((task) => (
           <Task
             key={task.id}
             task={task}
             handleDelete={handleDelete}
             handleEdit={handleEdit}
+            handleCheck={handleCheck}
           />
         ))
-      ) : (
+      ) : filter === "all" ? (
         <p className="task-empty">You have no tasks</p>
+      ) : filter === "progress" ? (
+        <p className="task-empty">You have no tasks in progress</p>
+      ) : (
+        <p className="task-empty">You have no completed tasks</p>
       )}
     </div>
   );
-};
-
-DisplayTasks.propTypes = {
-  tasks: propTypes.arrayOf(
-    propTypes.shape({
-      id: propTypes.number.isRequired,
-      checked: propTypes.bool.isRequired,
-      item: propTypes.string.isRequired,
-    })
-  ),
-  handleDelete: propTypes.func.isRequired,
-  handleEdit: propTypes.func.isRequired,
 };
 
 export default DisplayTasks;

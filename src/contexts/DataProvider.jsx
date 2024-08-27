@@ -3,7 +3,6 @@ import { createContext, useState } from "react";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-  console.log("render");
   const [newTask, setNewTask] = useState("");
   const [filter, setFilter] = useState("all");
   const [tasks, setTasks] = useState([
@@ -12,8 +11,10 @@ export const DataProvider = ({ children }) => {
     { id: 3, checked: false, item: "task 3" },
   ]);
   const [isEditing, setIsEditing] = useState({ editing: false, taskId: null });
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   const addTask = () => {
+    if (!newTask.trim()) return;
     setTasks((prevTasks) => {
       const newTaskObj = {
         id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
@@ -85,6 +86,8 @@ export const DataProvider = ({ children }) => {
         handleEdit,
         handleDelete,
         handleCheck,
+        filteredTasks,
+        setFilteredTasks,
       }}
     >
       {children}
