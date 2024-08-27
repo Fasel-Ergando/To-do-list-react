@@ -103,3 +103,40 @@ body {
   color: hsl(0, 0%, 0%, 0.7);
   background-color: white;
 }
+
+.task-empty {
+  color: #2980b9;
+  text-align: center;
+  padding: 10px;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.check-mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-mark .tick-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .check-mark {
+  background-color: #2980b9;
+  border: none;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .check-mark .tick-mark {
+  visibility: visible;
+}
