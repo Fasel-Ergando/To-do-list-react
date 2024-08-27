@@ -1,6 +1,9 @@
 import propTypes from "prop-types";
+import { useContext } from "react";
+import DataContext from "../contexts/DataProvider";
 
-const TaskFilters = ({ filter, setFilter }) => {
+const TaskFilters = () => {
+  const { filter, setFilter } = useContext(DataContext);
   return (
     <div className="filters">
       <div

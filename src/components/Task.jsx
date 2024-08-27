@@ -1,10 +1,12 @@
 import { GoTrash } from "react-icons/go";
 import CustomCheckbox from "./CustomCheckbox";
 import { GoPencil } from "react-icons/go";
-
+import { useContext } from "react";
+import DataContext from "../contexts/DataProvider";
 import propTypes from "prop-types";
 
-const Task = ({ task, handleDelete, handleEdit }) => {
+const Task = ({ task }) => {
+  const { handleDelete, handleEdit } = useContext(DataContext);
   return (
     <div className="task">
       <CustomCheckbox />

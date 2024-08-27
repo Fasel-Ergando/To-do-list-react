@@ -1,7 +1,10 @@
 import propTypes from "prop-types";
 import Task from "./Task";
+import { useContext } from "react";
+import DataContext from "../contexts/DataProvider";
 
-const DisplayTasks = ({ tasks, handleDelete, handleEdit }) => {
+const DisplayTasks = () => {
+  const { tasks, handleDelete, handleEdit } = useContext(DataContext);
   return (
     <div className="displayTasks">
       {tasks.length ? (

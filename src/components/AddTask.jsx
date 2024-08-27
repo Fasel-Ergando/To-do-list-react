@@ -1,6 +1,10 @@
 import propTypes from "prop-types";
+import { useContext } from "react";
+import DataContext from "../contexts/DataProvider";
 
-const AddTask = ({ newTask, setNewTask, handleSubmit }) => {
+const AddTask = () => {
+  const { newTask, setNewTask, handleSubmit, isEditing } =
+    useContext(DataContext);
   return (
     <form onSubmit={handleSubmit} className="add-task-form">
       <input
@@ -11,14 +15,14 @@ const AddTask = ({ newTask, setNewTask, handleSubmit }) => {
         onChange={(e) => setNewTask(e.target.value)}
       />
       <button className="add-task-btn" type="submit">
-        Add
+        {isEditing.editing ? "Edit" : "Add"}
       </button>
     </form>
   );
 };
 
 AddTask.propTypes = {
-  newTask: propTypes.string.isRequired,
+  newTask: propTypes.string,
   setNewTask: propTypes.func.isRequired,
   handleSubmit: propTypes.func.isRequired,
 };
