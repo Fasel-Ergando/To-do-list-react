@@ -1,12 +1,15 @@
 import { useState } from "react";
 import AddTask from "./components/AddTask";
+import TaskFilters from "./components/TaskFilters";
 import logo from "./assets/list-icon.svg";
 
 const App = () => {
   const [newTask, setNewTask] = useState("");
+  const [filter, setFilter] = useState("all");
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
   return (
     <div className="container">
       <div className="header-icon">
@@ -17,6 +20,7 @@ const App = () => {
         setNewTask={setNewTask}
         handleSubmit={handleSubmit}
       />
+      <TaskFilters filter={filter} setFilter={setFilter} />
     </div>
   );
 };
