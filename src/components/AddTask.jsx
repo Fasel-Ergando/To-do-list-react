@@ -10,7 +10,9 @@ const AddTask = ({ newTask, setNewTask, handleSubmit }) => {
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
       />
-      <button className="add-task-btn" type="submit">Add</button>
+      <button className="add-task-btn" type="submit">
+        Add
+      </button>
     </form>
   );
 };

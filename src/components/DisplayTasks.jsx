@@ -1,12 +1,17 @@
 import propTypes from "prop-types";
 import Task from "./Task";
 
-const DisplayTasks = ({ tasks, handleDelete }) => {
+const DisplayTasks = ({ tasks, handleDelete, handleEdit }) => {
   return (
     <div className="displayTasks">
       {tasks.length ? (
         tasks.map((task) => (
-          <Task key={task.id} task={task} handleDelete={handleDelete} />
+          <Task
+            key={task.id}
+            task={task}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
         ))
       ) : (
         <p className="task-empty">You have no tasks</p>
@@ -24,6 +29,7 @@ DisplayTasks.propTypes = {
     })
   ),
   handleDelete: propTypes.func.isRequired,
+  handleEdit: propTypes.func.isRequired,
 };
 
 export default DisplayTasks;

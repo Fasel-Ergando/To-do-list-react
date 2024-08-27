@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import AddTask from "./components/AddTask";
 import TaskFilters from "./components/TaskFilters";
 import DisplayTasks from "./components/DisplayTasks";
@@ -12,8 +12,9 @@ const App = () => {
     { id: 2, checked: false, item: "task 2" },
     { id: 3, checked: false, item: "task 3" },
   ]);
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [isEditing, setIsEditing] = useState({ editing: false, taskId: null });
+
+  const addTask = () => {
     setTasks((prevTasks) => {
       const newTaskObj = {
         id: tasks[tasks.length - 1].id + 1,
@@ -24,6 +25,33 @@ const App = () => {
     });
 
     setNewTask("");
+  };
+
+  const editTask = (id) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) =>
+        task.id === id ? { ...task, item: newTask } : task
+      );
+
+      return updatedTasks;
+    });
+    setIsEditing({ editing: false, taskId: null });
+    setNewTask("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isEditing.editing) {
+      addTask();
+    } else {
+      editTask(isEditing.taskId);
+    }
+  };
+
+  const handleEdit = (id) => {
+    setIsEditing({ editing: true, taskId: id });
+    const selectedTask = tasks.filter((task) => task.id === id);
+    setNewTask(selectedTask[0].item);
   };
 
   const handleDelete = (id) => {
@@ -44,7 +72,11 @@ const App = () => {
         handleSubmit={handleSubmit}
       />
       <TaskFilters filter={filter} setFilter={setFilter} />
-      <DisplayTasks tasks={tasks} handleDelete={handleDelete} />
+      <DisplayTasks
+        tasks={tasks}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
     </div>
   );
 };
