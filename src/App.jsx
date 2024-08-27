@@ -14,6 +14,23 @@ const App = () => {
   ]);
   const handleSubmit = (e) => {
     e.preventDefault();
+    setTasks((prevTasks) => {
+      const newTaskObj = {
+        id: tasks[tasks.length - 1].id + 1,
+        checked: false,
+        item: newTask,
+      };
+      return [...prevTasks, newTaskObj];
+    });
+
+    setNewTask("");
+  };
+
+  const handleDelete = (id) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.filter((task) => task.id !== id);
+      return updatedTasks;
+    });
   };
 
   return (
@@ -27,7 +44,7 @@ const App = () => {
         handleSubmit={handleSubmit}
       />
       <TaskFilters filter={filter} setFilter={setFilter} />
-      <DisplayTasks tasks={tasks} />
+      <DisplayTasks tasks={tasks} handleDelete={handleDelete} />
     </div>
   );
 };

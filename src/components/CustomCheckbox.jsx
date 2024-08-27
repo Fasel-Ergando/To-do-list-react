@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 const CustomCheckbox = () => {
   return (
     <label className="custom-checkbox">
@@ -12,9 +11,9 @@ const CustomCheckbox = () => {
             height="16px"
             fill="none"
             stroke="#fff"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path d="M5 12l5 5L19 7" />
           </svg>

@@ -4,7 +4,7 @@ import { GoPencil } from "react-icons/go";
 
 import propTypes from "prop-types";
 
-const Task = ({ task }) => {
+const Task = ({ task, handleDelete }) => {
   return (
     <div className="task">
       <CustomCheckbox />
@@ -14,7 +14,7 @@ const Task = ({ task }) => {
         <div className="edit-task">
           <GoPencil size="1.1em" />
         </div>
-        <div className="delete-task">
+        <div className="delete-task" onClick={() => handleDelete(task.id)}>
           <GoTrash size="1.1em" />
         </div>
       </div>
@@ -28,6 +28,7 @@ Task.propTypes = {
     checked: propTypes.bool.isRequired,
     item: propTypes.string.isRequired,
   }),
+  handleDelete: propTypes.func.isRequired,
 };
 
 export default Task;
