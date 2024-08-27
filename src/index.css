@@ -92,6 +92,7 @@ body {
   border-radius: 5px;
   font-weight: 500;
   padding: 5px;
+  user-select: none;
 }
 
 .filters .filter:hover {
@@ -129,7 +130,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  visibility: hidden;
 }
 
 .custom-checkbox input[type="checkbox"]:checked + .check-mark {
@@ -139,4 +139,51 @@ body {
 
 .custom-checkbox input[type="checkbox"]:checked + .check-mark .tick-mark {
   visibility: visible;
+}
+
+.displayTasks {
+  padding: 0 10px;
+}
+
+.task {
+  display: flex;
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
+  cursor: default;
+  user-select: none;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task-body {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.options {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.delete-task,
+.edit-task {
+  display: grid;
+  place-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.delete-task:hover,
+.edit-task:hover {
+  background-color: rgba(225, 225, 225, 0.9);
+}
+
+.delete-task:active,
+.edit-task:active {
+  background-color: rgba(225, 225, 225, 0.7);
 }
