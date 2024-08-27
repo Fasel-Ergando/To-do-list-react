@@ -1,7 +1,9 @@
-const CustomCheckbox = () => {
+
+const CustomCheckbox = ({ task, handleCheck }) => {
+  
   return (
     <label className="custom-checkbox">
-      <input type="checkbox" />
+      <input type="checkbox" checked={task.checked} onChange={() => handleCheck(task.id)} />
       <span className="check-mark">
         <div className="tick-mark">
           <svg

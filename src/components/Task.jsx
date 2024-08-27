@@ -6,11 +6,16 @@ import DataContext from "../contexts/DataProvider";
 import propTypes from "prop-types";
 
 const Task = ({ task }) => {
-  const { handleDelete, handleEdit } = useContext(DataContext);
+  const { handleDelete, handleEdit, handleCheck } = useContext(DataContext);
   return (
     <div className="task">
-      <CustomCheckbox />
-      <p className="task-body">{task.item}</p>
+      <CustomCheckbox task={task} handleCheck={handleCheck} />
+      <p
+        className="task-body"
+        style={{ textDecoration: task.checked ? "line-through" : "none" }}
+      >
+        {task.item}
+      </p>
 
       <div className="options">
         <div className="edit-task" onClick={() => handleEdit(task.id)}>

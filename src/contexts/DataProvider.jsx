@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
+  console.log("render");
   const [newTask, setNewTask] = useState("");
   const [filter, setFilter] = useState("all");
   const [tasks, setTasks] = useState([
@@ -15,7 +16,7 @@ export const DataProvider = ({ children }) => {
   const addTask = () => {
     setTasks((prevTasks) => {
       const newTaskObj = {
-        id: tasks[tasks.length - 1].id + 1,
+        id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
         checked: false,
         item: newTask,
       };
@@ -59,6 +60,15 @@ export const DataProvider = ({ children }) => {
     });
   };
 
+  const handleCheck = (id) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) =>
+        task.id === id ? { ...task, checked: !task.checked } : task
+      );
+      return updatedTasks;
+    });
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -74,6 +84,7 @@ export const DataProvider = ({ children }) => {
         handleSubmit,
         handleEdit,
         handleDelete,
+        handleCheck,
       }}
     >
       {children}
