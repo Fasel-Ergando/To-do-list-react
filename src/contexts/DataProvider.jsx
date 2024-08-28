@@ -11,7 +11,7 @@ export const DataProvider = ({ children }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    setTasks(JSON.parse(localStorage.getItem("user-to-do-list")));
+    setTasks(JSON.parse(localStorage.getItem("user-to-do-list")) || []);
   }, []);
 
   const saveTasks = (userTasks) => {
