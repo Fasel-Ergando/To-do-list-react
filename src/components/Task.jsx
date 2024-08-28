@@ -6,7 +6,8 @@ import DataContext from "../contexts/DataProvider";
 import propTypes from "prop-types";
 
 const Task = ({ task }) => {
-  const { handleCheck, handleEdit, handleDelete } = useContext(DataContext);
+  const { handleCheck, handleEdit, handleDelete, handleFocus } =
+    useContext(DataContext);
   return (
     <div className="task">
       <CustomCheckbox task={task} handleCheck={handleCheck} />
@@ -19,7 +20,13 @@ const Task = ({ task }) => {
       </p>
 
       <div className="options">
-        <div className="edit-task" onClick={() => handleEdit(task.id)}>
+        <div
+          className="edit-task"
+          onClick={() => {
+            handleEdit(task.id);
+            handleFocus(); // give focus on the input element
+          }}
+        >
           <GoPencil size="1.1em" />
         </div>
         <div className="delete-task" onClick={() => handleDelete(task.id)}>

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import DataContext from "../contexts/DataProvider";
 
 const AddTask = () => {
-  const { newTask, setNewTask, handleSubmit, isEditing } =
+  const { newTask, setNewTask, handleSubmit, isEditing, inputRef } =
     useContext(DataContext);
   return (
     <form onSubmit={handleSubmit} className="add-task-form">
@@ -12,6 +12,7 @@ const AddTask = () => {
         className="task-input"
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
+        ref={inputRef}
       />
       <button className="add-task-btn" type="submit">
         {isEditing.editing ? "Edit" : "Add"}
@@ -19,6 +20,5 @@ const AddTask = () => {
     </form>
   );
 };
-
 
 export default AddTask;

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useRef } from "react";
 
 const DataContext = createContext({});
 
@@ -12,6 +12,11 @@ export const DataProvider = ({ children }) => {
   ]);
   const [isEditing, setIsEditing] = useState({ editing: false, taskId: null });
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const inputRef = useRef(null);
+
+  const handleFocus = () => {
+    inputRef.current.focus();
+  };
 
   const addTask = () => {
     if (!newTask.trim()) return;
@@ -88,6 +93,8 @@ export const DataProvider = ({ children }) => {
         handleCheck,
         filteredTasks,
         setFilteredTasks,
+        inputRef,
+        handleFocus,
       }}
     >
       {children}

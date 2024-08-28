@@ -27,7 +27,7 @@ const DisplayTasks = () => {
   }, [filter, tasks]);
 
   return (
-    <div className="displayTasks">
+    <div className="display-tasks">
       {filteredTasks.length ? (
         filteredTasks.map((task) => (
           <Task
