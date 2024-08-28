@@ -27,7 +27,7 @@ const DisplayTasks = () => {
   }, [filter, tasks]);
 
   return (
-    <div className="display-tasks">
+    <div className="display-tasks scrollbar">
       {filteredTasks.length ? (
         filteredTasks.map((task) => (
           <Task

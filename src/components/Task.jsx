@@ -12,7 +12,7 @@ const Task = ({ task }) => {
     <div className="task">
       <CustomCheckbox task={task} handleCheck={handleCheck} />
       <p
-        className="task-body"
+        className="task-body scrollbar"
         onClick={() => handleCheck(task.id)}
         style={{ textDecoration: task.checked ? "line-through" : "none" }}
       >
