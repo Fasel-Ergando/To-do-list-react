@@ -1,18 +1,22 @@
-import { createContext, useState, useRef } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
   const [newTask, setNewTask] = useState("");
   const [filter, setFilter] = useState("all");
-  const [tasks, setTasks] = useState([
-    { id: 1, checked: false, item: "task 1" },
-    { id: 2, checked: false, item: "task 2" },
-    { id: 3, checked: false, item: "task 3" },
-  ]);
+  const [tasks, setTasks] = useState([]);
   const [isEditing, setIsEditing] = useState({ editing: false, taskId: null });
   const [filteredTasks, setFilteredTasks] = useState([]);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    setTasks(JSON.parse(localStorage.getItem("user-to-do-list")));
+  }, []);
+
+  const saveTasks = (userTasks) => {
+    localStorage.setItem("user-to-do-list", JSON.stringify(userTasks));
+  };
 
   const handleFocus = () => {
     inputRef.current.focus();
@@ -26,7 +30,9 @@ export const DataProvider = ({ children }) => {
         checked: false,
         item: newTask,
       };
-      return [...prevTasks, newTaskObj];
+      const updatedTasks = [...prevTasks, newTaskObj];
+      saveTasks(updatedTasks);
+      return updatedTasks;
     });
 
     setNewTask("");
@@ -37,7 +43,7 @@ export const DataProvider = ({ children }) => {
       const updatedTasks = prevTasks.map((task) =>
         task.id === id ? { ...task, item: newTask } : task
       );
-
+      saveTasks(updatedTasks);
       return updatedTasks;
     });
     setIsEditing({ editing: false, taskId: null });
@@ -62,6 +68,7 @@ export const DataProvider = ({ children }) => {
   const handleDelete = (id) => {
     setTasks((prevTasks) => {
       const updatedTasks = prevTasks.filter((task) => task.id !== id);
+      saveTasks(updatedTasks);
       return updatedTasks;
     });
   };
@@ -71,6 +78,7 @@ export const DataProvider = ({ children }) => {
       const updatedTasks = prevTasks.map((task) =>
         task.id === id ? { ...task, checked: !task.checked } : task
       );
+      saveTasks(updatedTasks);
       return updatedTasks;
     });
   };

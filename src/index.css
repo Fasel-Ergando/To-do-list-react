@@ -41,7 +41,7 @@ body {
 .container {
   height: fit-content;
   margin-top: 50px;
-  background-color: white;
+  background-color: #fff;
   padding: 20px 30px;
   border-radius: 10px;
   width: 100%;
@@ -150,6 +150,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  visibility: hidden;
 }
 
 .custom-checkbox input[type="checkbox"]:checked + .check-mark {
